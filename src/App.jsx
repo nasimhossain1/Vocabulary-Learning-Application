@@ -1,17 +1,35 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import StartLearning from "./pages/StartLearning";
+import Tutorials from "./pages/Tutorials";
+import AboutUs from "./pages/AboutUs";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import MyProfile from "./pages/MyProfile";
+import UpdateProfile from "./pages/UpdateProfile";
+import Lesson from "./pages/Lesson";
+import ErrorPage from "./pages/ErrorPage";
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
-      <div className="card bg-base-100 w-96 shadow-xl">
-        <div className="card-body text-center">
-          <h2 className="text-3xl font-bold">Lingo Bingo 🇯🇵</h2>
-          <p>Learn Japanese vocabulary in a fun way!</p>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/start-learning" element={<StartLearning />} />
+        <Route path="/tutorials" element={<Tutorials />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/update-profile" element={<UpdateProfile />} />
+        <Route path="/lessons/:lesson_no" element={<Lesson />} />
 
-          <div className="card-actions justify-center mt-4">
-            <button className="btn btn-primary">Start Learning</button>
-          </div>
-        </div>
-      </div>
-    </div>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
