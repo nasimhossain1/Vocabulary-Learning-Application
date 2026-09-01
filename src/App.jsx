@@ -32,7 +32,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/my-profile" element={<MyProfile />} />
             <Route path="/update-profile" element={<UpdateProfile />} />
-            <Route path="/lessons/:lesson_no" element={<Lesson />} />
+            <Route path="/lesson/:lesson_no" element={<Lesson />} />
 
             <Route path="*" element={<ErrorPage />} />
           </Routes>
