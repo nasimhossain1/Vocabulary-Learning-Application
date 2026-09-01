@@ -11,9 +11,14 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "aos": "^2.3.4",
     "daisyui": "^5.7.22",
+    "firebase": "^12.18.0",
     "react": "^19.2.8",
+    "react-countup": "^6.5.3",
     "react-dom": "^19.2.8",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.7.0",
     "react-router-dom": "^7.18.2",
     "tailwindcss": "^4.3.3"
   },
