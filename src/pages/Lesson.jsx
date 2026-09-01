@@ -1,150 +1,367 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import japaneseVocab from '../data/japaneseVocab.json';
-import { speakWord } from '../hooks/useSpeech';
+
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import japaneseVocab from "../data/japaneseVocab.json";
+import { speakWord } from "../hooks/useSpeech";
 
 const Lesson = () => {
   const { lesson_no } = useParams();
   const navigate = useNavigate();
+
   const [selectedWord, setSelectedWord] = useState(null);
 
-  // Router param অনুযায়ী নির্দিষ্ট লেসনের শব্দগুলো ফিল্টার করা
+  const lessonNumber = parseInt(lesson_no);
+
   const currentVocab = japaneseVocab.filter(
-    (item) => item.lesson_no === parseInt(lesson_no)
+    (item) => item.lesson_no === lessonNumber
   );
 
-  // Difficulty অনুযায়ী কার্ডের ব্যাকগ্রাউন্ড কালার সেট করা
+  // =========================
+  // Card Color
+  // =========================
   const getCardColor = (difficulty) => {
-    switch (difficulty.toLowerCase()) {
-      case 'easy':
-        return 'bg-green-50 border-green-300';
-      case 'medium':
-        return 'bg-blue-50 border-blue-300';
-      case 'difficult':
-        return 'bg-red-50 border-red-300';
-      default:
-        return 'bg-gray-50 border-gray-300';
+    const level = difficulty.toLowerCase();
+
+    if (level === "easy") {
+      return "bg-green-50 border-green-300";
     }
+
+    if (level === "medium") {
+      return "bg-blue-50 border-blue-300";
+    }
+
+    if (level === "difficult") {
+      return "bg-red-50 border-red-300";
+    }
+
+    return "bg-gray-50 border-gray-300";
   };
 
+  // =========================
+  // Badge Color
+  // =========================
   const getBadgeColor = (difficulty) => {
-    switch (difficulty.toLowerCase()) {
-      case 'easy':
-        return 'bg-green-200 text-green-800';
-      case 'medium':
-        return 'bg-blue-200 text-blue-800';
-      case 'difficult':
-        return 'bg-red-200 text-red-800';
-      default:
-        return 'bg-gray-200 text-gray-800';
+    const level = difficulty.toLowerCase();
+
+    if (level === "easy") {
+      return "bg-green-200 text-green-800";
     }
+
+    if (level === "medium") {
+      return "bg-blue-200 text-blue-800";
+    }
+
+    if (level === "difficult") {
+      return "bg-red-200 text-red-800";
+    }
+
+    return "bg-gray-200 text-gray-800";
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
-      
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <h1 className="text-3xl font-bold text-gray-800">
-          Lesson - {lesson_no} Vocabularies
-        </h1>
-        <button
-          onClick={() => navigate('/start-learning')}
-          className="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition"
-        >
-          Back to Lessons
-        </button>
+    <div className="min-h-screen px-4 py-8">
+
+      {/* =========================
+          Page Header
+      ========================== */}
+      <div
+        className="max-w-7xl mx-auto mb-8"
+        data-aos="fade-down"
+      >
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+
+          <div>
+            <span className="badge badge-primary badge-outline mb-2">
+              Japanese Vocabulary
+            </span>
+
+            <h1 className="text-3xl md:text-4xl font-extrabold">
+              Lesson {lesson_no}
+            </h1>
+
+            <p className="text-base-content/60 mt-2">
+              Learn these Japanese words and practice their pronunciation.
+            </p>
+          </div>
+
+          <button
+            onClick={() => navigate("/start-learning")}
+            className="btn btn-outline"
+          >
+            ← Back to Lessons
+          </button>
+
+        </div>
       </div>
 
-      {/* Vocabulary Cards Grid */}
-      {currentVocab.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {currentVocab.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => speakWord(item.word)}
-              className={`p-6 border-2 rounded-2xl shadow-sm hover:shadow-md transition cursor-pointer flex flex-col justify-between ${getCardColor(
-                item.difficulty
-              )}`}
-            >
-              <div className="space-y-3">
-                <div className="flex justify-between items-start">
-                  <h2 className="text-3xl font-extrabold text-gray-900">
-                    {item.word}
-                  </h2>
-                  <span
-                    className={`text-xs px-2.5 py-1 rounded-full font-semibold uppercase ${getBadgeColor(
-                      item.difficulty
-                    )}`}
-                  >
-                    {item.difficulty}
-                  </span>
+      {/* =========================
+          Vocabulary Cards
+      ========================== */}
+      <div className="max-w-7xl mx-auto">
+
+        {currentVocab.length > 0 ? (
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {currentVocab.map((item) => {
+
+              const cardColor = getCardColor(item.difficulty);
+              const badgeColor = getBadgeColor(item.difficulty);
+
+              return (
+                <div
+                  key={item.id}
+                  onClick={() => speakWord(item.word)}
+                  className={`p-6 border-2 rounded-2xl shadow-sm hover:shadow-lg transition cursor-pointer flex flex-col justify-between ${cardColor}`}
+                >
+
+                  {/* Word Information */}
+                  <div className="space-y-4">
+
+                    {/* Word + Difficulty */}
+                    <div className="flex justify-between items-start gap-3">
+
+                      <h2 className="text-4xl font-extrabold text-gray-900">
+                        {item.word}
+                      </h2>
+
+                      <span
+                        className={`text-xs px-3 py-1 rounded-full font-bold uppercase ${badgeColor}`}
+                      >
+                        {item.difficulty}
+                      </span>
+
+                    </div>
+
+                    {/* Pronunciation */}
+                    <div>
+                      <p className="text-sm text-gray-500">
+                        Pronunciation
+                      </p>
+
+                      <p className="text-lg font-semibold text-gray-800">
+                        {item.pronunciation}
+                      </p>
+                    </div>
+
+                    {/* Meaning */}
+                    <div>
+                      <p className="text-sm text-gray-500">
+                        Meaning
+                      </p>
+
+                      <p className="text-lg font-semibold text-gray-800">
+                        {item.meaning}
+                      </p>
+                    </div>
+
+                    {/* Part of Speech */}
+                    <div>
+                      <p className="text-sm text-gray-500">
+                        Part of Speech
+                      </p>
+
+                      <p className="text-sm font-medium text-gray-700 capitalize">
+                        {item.part_of_speech}
+                      </p>
+                    </div>
+
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="mt-6 flex gap-3">
+
+                    {/* Speak Button */}
+                    <button
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        speakWord(item.word);
+                      }}
+                      className="btn btn-primary flex-1"
+                    >
+                      🔊 Listen
+                    </button>
+
+                    {/* When to Say */}
+                    <button
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setSelectedWord(item);
+                      }}
+                      className="btn btn-outline flex-1"
+                    >
+                      💬 Details
+                    </button>
+
+                  </div>
+
                 </div>
+              );
+            })}
 
-                <p className="text-lg font-medium text-gray-700">
-                  <span className="text-gray-500 text-sm">Pronunciation:</span> {item.pronunciation}
-                </p>
+          </div>
 
-                <p className="text-gray-800">
-                  <span className="font-semibold">Meaning:</span> {item.meaning}
-                </p>
+        ) : (
 
-                <p className="text-sm text-gray-600 italic">
-                  Part of speech: {item.part_of_speech}
-                </p>
-              </div>
+          /* No Vocabulary */
+          <div className="text-center py-16">
 
-              {/* Modal trigger button */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation(); // কার্ডের ক্লিক ইভেন্ট থামাবে (যাতে দুটি স্পিচ কল না হয়)
-                  setSelectedWord(item);
-                }}
-                className="mt-6 w-full bg-indigo-500 text-white font-medium py-2 rounded-lg hover:bg-indigo-600 transition"
-              >
-                When to Say
-              </button>
+            <div className="text-6xl mb-5">
+              📚
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12 text-gray-500 text-xl">
-          No vocabularies found for Lesson {lesson_no}.
+
+            <h2 className="text-2xl font-bold mb-2">
+              No Vocabulary Found
+            </h2>
+
+            <p className="text-gray-500 mb-6">
+              There are no vocabulary words available for Lesson{" "}
+              {lesson_no}.
+            </p>
+
+            <button
+              onClick={() => navigate("/start-learning")}
+              className="btn btn-primary"
+            >
+              ← Back to Lessons
+            </button>
+
+          </div>
+        )}
+
+      </div>
+
+      {/* =========================
+          Quiz Button
+      ========================== */}
+      {currentVocab.length > 0 && (
+        <div
+          className="max-w-7xl mx-auto mt-10 text-center"
+          data-aos="fade-up"
+        >
+          <div className="bg-base-200 rounded-3xl p-8">
+
+            <div className="text-5xl mb-4">
+              🧠
+            </div>
+
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Ready to test yourself?
+            </h2>
+
+            <p className="text-base-content/60 mt-2 mb-5">
+              Take a quiz and check how well you remember these words.
+            </p>
+
+            <button
+              onClick={() =>
+                navigate(`/lesson/${lesson_no}/quiz`)
+              }
+              className="btn btn-primary px-8"
+            >
+              Start Quiz →
+            </button>
+
+          </div>
         </div>
       )}
 
-      {/* When to Say Modal */}
+      {/* =========================
+          Details Modal
+      ========================== */}
       {selectedWord && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl p-6 max-w-lg w-full space-y-4 shadow-xl">
-            <h3 className="text-2xl font-bold text-gray-800 border-b pb-2">
-              {selectedWord.word} ({selectedWord.pronunciation})
-            </h3>
-            
-            <p className="text-gray-700">
-              <span className="font-semibold text-gray-900">Meaning: </span>
-              {selectedWord.meaning}
-            </p>
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+          onClick={() => setSelectedWord(null)}
+        >
 
-            <p className="text-gray-700">
-              <span className="font-semibold text-gray-900">When to say: </span>
-              {selectedWord.when_to_say}
-            </p>
+          <div
+            className="bg-white rounded-3xl p-6 md:p-8 max-w-lg w-full shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
 
-            <div className="bg-gray-50 p-4 rounded-xl border">
-              <p className="text-sm font-semibold text-gray-700 mb-1">Example:</p>
-              <p className="text-gray-800 italic">{selectedWord.example}</p>
-            </div>
+            {/* Modal Header */}
+            <div className="flex justify-between items-start gap-4 border-b pb-4">
 
-            <div className="text-right pt-2">
+              <div>
+                <h3 className="text-3xl font-extrabold text-gray-900">
+                  {selectedWord.word}
+                </h3>
+
+                <p className="text-primary font-medium mt-1">
+                  {selectedWord.pronunciation}
+                </p>
+              </div>
+
               <button
                 onClick={() => setSelectedWord(null)}
-                className="bg-gray-700 text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition"
+                className="btn btn-sm btn-circle btn-ghost"
+              >
+                ✕
+              </button>
+
+            </div>
+
+            {/* Meaning */}
+            <div className="mt-5 space-y-4">
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Meaning
+                </p>
+
+                <p className="text-lg font-semibold text-gray-800">
+                  {selectedWord.meaning}
+                </p>
+              </div>
+
+              {/* When to Say */}
+              <div>
+                <p className="text-sm text-gray-500">
+                  When to say
+                </p>
+
+                <p className="text-gray-800">
+                  {selectedWord.when_to_say}
+                </p>
+              </div>
+
+              {/* Example */}
+              <div className="bg-gray-50 border rounded-2xl p-4">
+
+                <p className="text-sm font-semibold text-gray-600 mb-2">
+                  Example
+                </p>
+
+                <p className="text-gray-800 italic">
+                  {selectedWord.example}
+                </p>
+
+              </div>
+
+            </div>
+
+            {/* Modal Buttons */}
+            <div className="flex gap-3 mt-6">
+
+              <button
+                onClick={() => speakWord(selectedWord.word)}
+                className="btn btn-primary flex-1"
+              >
+                🔊 Listen
+              </button>
+
+              <button
+                onClick={() => setSelectedWord(null)}
+                className="btn btn-outline flex-1"
               >
                 Close
               </button>
+
             </div>
+
           </div>
+
         </div>
       )}
 
