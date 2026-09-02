@@ -16,6 +16,7 @@ import UpdateProfile from "./pages/UpdateProfile";
 import Lesson from "./pages/Lesson";
 import Quiz from "./pages/Quiz";
 import ErrorPage from "./pages/ErrorPage";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
