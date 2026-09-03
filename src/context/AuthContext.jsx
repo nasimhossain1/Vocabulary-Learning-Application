@@ -41,11 +41,20 @@ const AuthProvider = ({ children }) => {
   };
 
   // Update name & photo
-  const updateUserProfile = (name, photoURL) => {
-    return updateProfile(auth.currentUser, {
+  const updateUserProfile = async (name, photoURL) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      throw new Error("User is not logged in. Please login again.");
+    }
+
+    await updateProfile(currentUser, {
       displayName: name,
-      photoURL: photoURL,
+      photoURL: photoURL || null,
     });
+
+    // Update React state
+    setUser({ ...currentUser });
   };
 
   // Forgot Password
