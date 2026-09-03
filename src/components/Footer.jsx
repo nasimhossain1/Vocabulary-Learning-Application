@@ -1,69 +1,46 @@
-import { Link } from "react-router-dom";
-
 const Footer = () => {
   return (
     <footer className="bg-neutral text-neutral-content">
-      <div className="footer max-w-7xl mx-auto p-10">
-        
-        {/* Brand */}
-        <aside>
-          <Link to="/" className="text-2xl font-bold">
-            Lingo Bingo
-          </Link>
-
-          <p className="max-w-xs">
-            Learn Japanese vocabulary in a fun, simple and interactive way.
-          </p>
-        </aside>
-
-        {/* Navigation */}
-        <nav>
-          <h6 className="footer-title">Navigation</h6>
-
-          <Link to="/" className="link link-hover">
-            Home
-          </Link>
-
-          <Link to="/start-learning" className="link link-hover">
-            Start Learning
-          </Link>
-
-          <Link to="/tutorials" className="link link-hover">
-            Tutorials
-          </Link>
-
-          <Link to="/about-us" className="link link-hover">
-            About Us
-          </Link>
-        </nav>
-
-        {/* Contact */}
-        <nav>
-          <h6 className="footer-title">Contact</h6>
-
-          <p>Email: support@lingobingo.com</p>
-
-          <p>Dhaka, Bangladesh</p>
-        </nav>
-
-        {/* Social */}
-        <nav>
-          <h6 className="footer-title">Follow Us</h6>
-
-          <div className="flex gap-4 text-xl">
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
+      <div className="max-w-6xl mx-auto px-6 py-10">
+        <div className="grid md:grid-cols-3 gap-8">
+          
+          {/* Brand */}
+          <div>
+            <h2 className="text-2xl font-bold mb-3">
+              🗣️ Lingo Bingo
+            </h2>
+            <p className="text-sm opacity-80 leading-6">
+              Learn new vocabulary, practice pronunciation, and improve your
+              language skills with fun and interactive lessons.
+            </p>
           </div>
-        </nav>
 
-      </div>
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-bold text-lg mb-3">Quick Links</h3>
+            <ul className="space-y-2 text-sm opacity-80">
+              <li>Home</li>
+              <li>Start Learning</li>
+              <li>Tutorials</li>
+              <li>About Us</li>
+            </ul>
+          </div>
 
-      {/* Copyright */}
-      <div className="border-t border-gray-600 text-center py-5">
-        <p>
-          © {new Date().getFullYear()} Lingo Bingo. All Rights Reserved.
-        </p>
+          {/* Contact */}
+          <div>
+            <h3 className="font-bold text-lg mb-3">Learning With Us</h3>
+            <p className="text-sm opacity-80 leading-6">
+              Make language learning a daily habit and take one step closer to
+              becoming a confident language learner.
+            </p>
+          </div>
+        </div>
+
+        <div className="border-t border-neutral-content/20 mt-8 pt-6 text-center">
+          <p className="text-sm opacity-70">
+            © {new Date().getFullYear()} Lingo Bingo. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );
