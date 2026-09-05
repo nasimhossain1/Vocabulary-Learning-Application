@@ -141,59 +141,61 @@ const Home = () => {
       {/* =========================
           HERO
       ========================= */}
-      <section className="w-full px-2 sm:px-4 py-3 sm:py-6 md:py-10 lg:px-7 lg:pl-28">
-        <div
-          className="max-w-7xl mx-auto carousel w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
-          data-aos="fade-down"
-        >
+      <section className="w-full px-2 sm:px-4 py-3 sm:py-6 md:py-10 lg:px-7">
+  <div className="w-full flex justify-center">
+    <div
+      className="max-w-7xl w-full carousel rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
+      data-aos="fade-down"
+    >
 
-          {/* Slide 1 */}
-          <HeroSlide
-            id="slide1"
-            image="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1800&q=85"
-            alt="Japan"
-            badge="🇯🇵 Lingo Bingo"
-            title="Start Your Japanese Journey"
-            description="Learn Japanese vocabulary in a simple and enjoyable way with structured lessons, pronunciation practice and real-life examples."
-            buttonText="Start Learning"
-            buttonLink="/start-learning"
-            buttonClass="btn-primary"
-            prev="slide3"
-            next="slide2"
-          />
+      {/* Slide 1 */}
+      <HeroSlide
+        id="slide1"
+        image="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1800&q=85"
+        alt="Japan"
+        badge="🇯🇵 Lingo Bingo"
+        title="Start Your Japanese Journey"
+        description="Learn Japanese vocabulary in a simple and enjoyable way with structured lessons, pronunciation practice and real-life examples."
+        buttonText="Start Learning"
+        buttonLink="/start-learning"
+        buttonClass="btn-primary"
+        prev="slide3"
+        next="slide2"
+      />
 
-          {/* Slide 2 */}
-          <HeroSlide
-            id="slide2"
-            image="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1800&q=85"
-            alt="Japanese city"
-            badge="📚 Learn Every Day"
-            title="Build Your Vocabulary"
-            description="Discover useful Japanese words and learn how to use them naturally in everyday conversations."
-            buttonText="Explore Lessons"
-            buttonLink="/start-learning"
-            buttonClass="btn-secondary"
-            prev="slide1"
-            next="slide3"
-          />
+      {/* Slide 2 */}
+      <HeroSlide
+        id="slide2"
+        image="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1800&q=85"
+        alt="Japanese city"
+        badge="📚 Learn Every Day"
+        title="Build Your Vocabulary"
+        description="Discover useful Japanese words and learn how to use them naturally in everyday conversations."
+        buttonText="Explore Lessons"
+        buttonLink="/start-learning"
+        buttonClass="btn-secondary"
+        prev="slide1"
+        next="slide3"
+      />
 
-          {/* Slide 3 */}
-          <HeroSlide
-            id="slide3"
-            image="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1800&q=85"
-            alt="Japanese temple"
-            badge="🔊 Speak With Confidence"
-            title="Learn. Practice. Remember."
-            description="Listen to pronunciation, understand meanings and practice Japanese vocabulary with practical examples."
-            buttonText="Watch Tutorials"
-            buttonLink="/tutorials"
-            buttonClass="btn-accent"
-            prev="slide2"
-            next="slide1"
-          />
-        </div>
-      </section>
+      {/* Slide 3 */}
+      <HeroSlide
+        id="slide3"
+        image="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1800&q=85"
+        alt="Japanese temple"
+        badge="🔊 Speak With Confidence"
+        title="Learn. Practice. Remember."
+        description="Listen to pronunciation, understand meanings and practice Japanese vocabulary with practical examples."
+        buttonText="Watch Tutorials"
+        buttonLink="/tutorials"
+        buttonClass="btn-accent"
+        prev="slide2"
+        next="slide1"
+      />
 
+    </div>
+  </div>
+</section>
       {/* =========================
           ABOUT
       ========================= */}
